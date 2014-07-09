@@ -1,83 +1,124 @@
 <?php
 
 	$linelenght=2;
+	$maxlenght=200;
 	$fefeslapfile="./archlinux-co-frases-de-fortuna/fefes";
-	
-	do {
-		$f_contents = file($fefeslapfile);
-		$line = $f_contents[array_rand($f_contents)];
-		$data = $line;
-		#echo "." . $data . ".";
-		$linelenght = strlen($data);
-	} while ($linelenght < 3);
+        $myvar=$_SERVER["QUERY_STRING"];	      
+	$printfefeslap=0;
+	if (!isset($myvar) && trim($myvar)===''){ 
+		// if no argument given, choose a random fefeslap
+		$handle = fopen($fefeslapfile, "r");
+		do {
+			$f_contents = file($fefeslapfile);
+			$line = $f_contents[array_rand($f_contents)];
+			$data = $line;
+			#echo "." . $data . ".";
+			$linelenght = strlen($data);
+		} while ($linelenght < 4);
+		fclose($handle);
 
-	// now get fefe fact line number
-	$file=$fefeslapfile;
-	$linecount = 0;
-	$handle = fopen($file, "r");
-	while(!feof($handle)){
-  		$line = fgets($handle);
-  		$linecount++;
-		if ($line == $data) {
-			$fefefactnumber=$linecount;
+		// now get fefe fact line number
+		$linecount = 0;
+		$handle = fopen($fefeslapfile, "r");
+		while(!feof($handle)){
+  			$line = fgets($handle);
+  			$linecount++;
+			if ($line == $data) {
+				$fefefactnumber=$linecount;
+			}
 		}
-	}
+		$fefefactnumber=$linecount-1;
 
-	fclose($handle);
+		fclose($handle);
 
-	#echo $linecount . "Fefefact: " . $fefefactnumber;
+		#echo $linecount . "Fefefact: " . $fefefactnumber;
 
-        #$myvar=$_SERVER["QUERY_STRING"];
-        #if (!isset($myvar) || trim($myvar)===''){ $myvar = "negro"; }
+	} else {
+		//yes, we have an argument given
+		//determine if is a name or a number
+			if ( (is_numeric($myvar)) && (intval($myvar) >= 0) ) {
+				//myvar is a number and not zero
+				$file=$fefeslapfile;
+				$linecount = 0;
+				$handle = fopen($file, "r");
+				while(!feof($handle)){
+  					$line = fgets($handle);
+  					$linecount++;
+				}
+
+				fclose($handle);
+
+				#echo "($myvar) mayor ($linecount) ";				
+				if ( intval($myvar) > (intval($linecount)-1) ) {
+					//echo " { $myvar > $linecount }";
+					echo "<meta http-equiv=\"refresh\" content=\"0; url=http://fefeslap.cf/\" />\n";
+					exit;				
+				}
+
+				//find fefefact number
+
+
+				$lines = file( $fefeslapfile ); 
+				$data=$lines[$myvar];
+				$linelenght = strlen($data);
+				$fefefactnumber=$myvar;
+
+				if ($linelenght < 4) {
+	 				echo "<meta http-equiv=\"refresh\" content=\"0; url=http://fefeslap.cf/\" />\n";
+					exit;
+				}
+				
+			} else {
+				//is a string, probably a name
+				// get a random fefefact
+				// now get fefe fact line number
+				$linecount = 0;
+
+				$handle = fopen($fefeslapfile, "r");	
+				do {
+					$f_contents = file($fefeslapfile);
+					$line = $f_contents[array_rand($f_contents)];
+					$data = $line;
+					#echo "." . $data . ".";
+					$linelenght = strlen($data);
+				} while ($linelenght < 4);
+				fclose($handle);
+
+				$handle = fopen($fefeslapfile, "r");
+				while(!feof($handle)){
+  					$line = fgets($handle);
+  					$linecount++;
+					if ($line == $data) {
+						$fefefactnumber=$linecount;
+					}
+				}
+
+				fclose($handle);
+				$printfefeslap=TRUE;
+		}
+	} //no given fefefact 
+
+$fefefactnumber=$myvar;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-        <title><?php echo "fefeslap #" . $fefefactnumber . ": " . substr($data, 0, 120) . " ..."; ?></title>
+        <title>
+		<?php 
+			//construct my $title
+			if ( ! $printfefeslap ) {
+				$mytitle="fefeslap($fefefactnumber): http://fefeslap.cf/?$fefefactnumber " . substr($data, 0, $maxlenght);
+			} else {
+				$mytitle="fefeslaps \"$myvar\" con http://fefeslap.cf/?$fefefactnumber " . substr($data, 0, $maxlenght);
+			}
+			echo "$mytitle"; 
+			if ( strlen($data) > $maxlenght ) {
+				//to avoid flood in title
+				echo " ...";
+			} 
+		?>
+	</title>
         <meta charset="utf-8">
-
-        <script type="text/javascript">
-//<![CDATA[
-try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/c$
-//]]>
-</script>
-<style>
-                @font-face {
-                        font-family: 'Open Sans';
-                        font-style: normal;
-                        font-weight: 400;
-                        src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'),
-                        url(https://themes.googleusercontent.com/static/fonts/opensans/v8/EInbV5DfGHOiMmvb1Xr-hnhCUOGz7vYGh6$
-                        }
-
-                h1 {
-                        top: 50%;
-                        position: absolute;
-                        margin: -80px auto 0;
-                        line-height: 160px;
-                        font-size: 160px;
-                        font-family: 'Open Sans';
-                        font-style: normal;
-                        font-weight: 400;
-                        src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'),
-                        url(https://themes.googleusercontent.com/static/fonts/opensans/v8/EInbV5DfGHOiMmvb1Xr-hnhCUOGz7vYGh6$
-                        }
-
-                h1 {
-                        top: 50%;
-                        position: absolute;
-                        margin: -80px auto 0;
-                        line-height: 160px;
-                        font-size: 160px;
-                        font-family: 'Open Sans';
-                        font-style: normal;
-                        font-weight: 400;
-                        height: 120px;
-                        width: 100%;
-                        text-align: center;
-                        color: #E68383;
-                }
-        </style>
 </head>
 <body>
 <center>
@@ -91,7 +132,21 @@ try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </center>
-        <center><h1><?php echo "fefefacto #" . $fefefactnumber ."</h1><textarea rows=\"4\" cols=\"100\">" . $data . "</textarea></center>"; ?>
+        <center>
+			<?php 
+			//construct my $title
+			if ( $printfefeslap ) {
+				echo "<h3>fefeslaps \"$myvar\" con <a href=\"http://fefeslap.cf/?$fefefactnumber\">
+		http://fefeslap.cf/?$fefefactnumber
+	</a></h3>";
+			}
+				echo "<h1>fefefacto #" . $fefefactnumber ."</h1>
+	<a href=\"http://fefeslap.cf/?$fefefactnumber\">
+		http://fefeslap.cf/?$fefefactnumber
+	</a><br>
+	<textarea rows=\"4\" cols=\"100\">$data</textarea>
+	</center>"; 
+		?>
 </body>
 </html>
 
