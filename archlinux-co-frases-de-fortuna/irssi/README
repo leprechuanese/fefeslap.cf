@@ -1,0 +1,11 @@
+# Instrucciones:
+
+copiar sh2me.pl en ~/.irssi/scripts/autorun
+
+crear directorio mkdir ~/.irssi/scripts/fortune y copiar los ficheros ahí
+
+# Agregar los alias:
+
+/alias GOLPEAR sh2me ~/scripts/fortune/golpear.sh archco $*
+/alias FEFEAR sh2me ~/scripts/fortune/golpear.sh fefes $*
+/alias RENGUEAR sh2me ~/scripts/fortune/golpear.sh rengo $*
