@@ -29,10 +29,10 @@ $slapnumber = mysql_real_escape_string(htmlspecialchars($_REQUEST['s']));
 if ( is_numeric($myvar) ) {
 	//user request a fefefact #
 	$tmpslapnumber=$tmpvar;
-	$typeofslap=1 //slap with $myvar facto
+	$typeofslap=1; //slap with $myvar facto
 }
 
-if ( $tmpslapnumber ) { 
+if ( isset($tmpslapnumber) ) { 
 	//user already give a slapnumber
 	//so if s= is SET, ISSUE an ERROR
 	if ( is_numeric($slapnumber) ) { $ERRORDETECTED = 1; }
@@ -40,7 +40,7 @@ if ( $tmpslapnumber ) {
 
 if ( isset($myvar) ) { 
 	// if myvar is set then check if &s=XXX exist
-	if ( (isset($slapnumber) ) {
+	if ( isset($slapnumber) ) {
 		//substr from &s=XXX if exist
 		$tmpvar=str_replace("&s=$slapnumber","","$myvar");
 		$typeofslap=3; //slap myvar with s=XXX
@@ -59,26 +59,26 @@ if ( ! isset($myvar) && isset($slapnumber) ) {
 if ( intval($slapnumber) <= 0 ) { $ERRORDETECTED = 1; }
 
 
-if ( $ERRORDETECTED ) {	echo "ERROR"; }
+//if ( $ERRORDETECTED ) {	echo "ERROR"; }
 
 
 switch ($typeofslap) {
-    case "0":
-        echo "random slap";
+    case 0:
+        echo "0: random slap";
         break;
-    case "1":
-        echo "slap with $myvar";
+    case 1:
+        echo "1: slap with $myvar";
         break;
-    case "2":
-        echo "slap $myvar with randomslap";
+    case 2:
+        echo "2: slap $myvar with randomslap";
         break;
-    case "3":
-        echo "slap $myvar with $slapnumber";
+    case 3:
+        echo "3: slap $myvar with $slapnumber";
         break;
 
 
 } 
-echo "* $myvar *\n * $slapnumber *";
+//echo "* $myvar *\n * $slapnumber *";
 exit;     
 	$printfefeslap=0;
 	//construct my $title
