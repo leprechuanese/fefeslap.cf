@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+#
+# Convert fefes to sql format
+# Example
+# INSERT INTO `fefeslapuser`.`fefeslap` (`fefefactID`, `fefefact`, `numberviews`, `created`, `last_visit`, `last_ip`) 
+# VALUES ('1', 'con un mama21mama> Si muero de amor hoy, mi pene lo ponen en las islas malvinas.y con las pelotas 
+# hacete un pate de foy y te lo comes de desayuno hdmp!#nomeama', '0', CURRENT_DATE(), CURRENT_DATE(), '127.0.0.1'); 
+
+# $(date +%Y-%m-%d)
+# read fefes, one line at time
+i=1
+while IFS= read -r line; do
+	if [ "$line" != "%" ]; then
+		echo "INSERT INTO \`fefeslapuser\`.\`fefeslap\` (\`fefefactID\`, \`fefefact\`, \`numberviews\`, \`created\`, \`last_visit\`, \`last_ip\`) VALUES ('$i', '$line','0','"$(date +%Y-%m-%d)"','"$(date +%Y-%m-%d)"','127.0.0.1');"
+		let i++
+	fi
+done < "fefes"

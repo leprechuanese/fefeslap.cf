@@ -1,105 +1,107 @@
 <?php
+//incluye definiciones
 
-	$linelenght=2;
-	$maxlenght=200;
-	$fefeslapfile="./archlinux-co-frases-de-fortuna/fefes";
-        $myvar=$_SERVER["QUERY_STRING"];	      
-	$printfefeslap=0;
-	if (!isset($myvar) && trim($myvar)===''){ 
-		// if no argument given, choose a random fefeslap
-		$handle = fopen($fefeslapfile, "r");
-		do {
-			$f_contents = file($fefeslapfile);
-			$line = $f_contents[array_rand($f_contents)];
-			$data = $line;
-			#echo "." . $data . ".";
-			$linelenght = strlen($data);
-		} while ($linelenght < 4);
-		fclose($handle);
+include_once "includes/functions.php";
+include_once "includes/defs.php";
 
-		// now get fefe fact line number
-		$linecount = 0;
-		$handle = fopen($fefeslapfile, "r");
-		while(!feof($handle)){
-  			$line = fgets($handle);
-  			$linecount++;
-			if ($line == $data) {
-				$fefefactnumber=$linecount;
-			}
-		}
-		$fefefactnumber=$linecount-1;
+//conect mysql server
+$mysql = connectmysql();
+$conn = $mysql;
 
-		fclose($handle);
+if ( DEBUG ) { $mydomain=""; }
+//determine whatever if requesting fact number
+//slap $myvar with a random facto number
+//slap $myvar with a facto number
+//slap with a random facto
 
-		#echo $linecount . "Fefefact: " . $fefefactnumber;
+$typeofslap=0; // 0 = random to nobody, 1 = slap with $myvar, 2 = $myvar + random, 3 = $myvar + facto
+$ERRORDETECTED=0;
+$tmpvar="";
+$tmpslapnumber=0;
 
+// get $whole string
+$myvar=$_SERVER["QUERY_STRING"];
+
+// get factonumber if exist
+$slapnumber = mysql_real_escape_string(htmlspecialchars($_REQUEST['s']));
+
+//check if $tmpvar if a fefeslap numeric
+if ( is_numeric($myvar) ) {
+	//user request a fefefact #
+	$tmpslapnumber=$tmpvar;
+	$typeofslap=1 //slap with $myvar facto
+}
+
+if ( $tmpslapnumber ) { 
+	//user already give a slapnumber
+	//so if s= is SET, ISSUE an ERROR
+	if ( is_numeric($slapnumber) ) { $ERRORDETECTED = 1; }
+}
+
+if ( isset($myvar) ) { 
+	// if myvar is set then check if &s=XXX exist
+	if ( (isset($slapnumber) ) {
+		//substr from &s=XXX if exist
+		$tmpvar=str_replace("&s=$slapnumber","","$myvar");
+		$typeofslap=3; //slap myvar with s=XXX
 	} else {
-		//yes, we have an argument given
-		//determine if is a name or a number
-			if ( (is_numeric($myvar)) && (intval($myvar) >= 0) ) {
-				//myvar is a number and not zero
-				$file=$fefeslapfile;
-				$linecount = 0;
-				$handle = fopen($file, "r");
-				while(!feof($handle)){
-  					$line = fgets($handle);
-  					$linecount++;
-				}
+		//slap $myvar with random slap
+		$typeofslap=2;
+	}
+}
 
-				fclose($handle);
+if ( ! isset($myvar) && isset($slapnumber) ) {
+	//slap with random 
+	$typeofslap=0;
+}
 
-				#echo "($myvar) mayor ($linecount) ";				
-				if ( intval($myvar) > (intval($linecount)-1) ) {
-					//echo " { $myvar > $linecount }";
-					echo "<meta http-equiv=\"refresh\" content=\"0; url=http://fefeslap.cf/\" />\n";
-					exit;				
-				}
-
-				//find fefefact number
+//if slapnumber less that zero
+if ( intval($slapnumber) <= 0 ) { $ERRORDETECTED = 1; }
 
 
-				$lines = file( $fefeslapfile ); 
-				$data=$lines[$myvar];
-				$linelenght = strlen($data);
-				$fefefactnumber=$myvar;
+if ( $ERRORDETECTED ) {	echo "ERROR"; }
 
-				if ($linelenght < 4) {
-	 				echo "<meta http-equiv=\"refresh\" content=\"0; url=http://fefeslap.cf/\" />\n";
-					exit;
-				}
-				
-			} else {
-				//is a string, probably a name
-				// get a random fefefact
-				// now get fefe fact line number
-				$linecount = 0;
 
-				$handle = fopen($fefeslapfile, "r");	
-				do {
-					$f_contents = file($fefeslapfile);
-					$line = $f_contents[array_rand($f_contents)];
-					$data = $line;
-					#echo "." . $data . ".";
-					$linelenght = strlen($data);
-				} while ($linelenght < 4);
-				fclose($handle);
+switch ($typeofslap) {
+    case "0":
+        echo "random slap";
+        break;
+    case "1":
+        echo "slap with $myvar";
+        break;
+    case "2":
+        echo "slap $myvar with randomslap";
+        break;
+    case "3":
+        echo "slap $myvar with $slapnumber";
+        break;
 
-				$handle = fopen($fefeslapfile, "r");
-				while(!feof($handle)){
-  					$line = fgets($handle);
-  					$linecount++;
-					if ($line == $data) {
-						$fefefactnumber=$linecount;
-					}
-				}
 
-				fclose($handle);
-				$printfefeslap=TRUE;
-		}
-	} //no given fefefact 
+} 
+echo "* $myvar *\n * $slapnumber *";
+exit;     
+	$printfefeslap=0;
+	//construct my $title
+	if ( ! $printfefeslap ) {
+		$mytitle="fefeslap($fefefactnumber): http://fefeslap.cf/?$fefefactnumber " . substr($data, 0, $maxlenght);
+	} else {
+		$mytitle="fefeslaps $myvar con http://fefeslap.cf/?$fefefactnumber " . substr($data, 0, $maxlenght);
+	}
+ 
+	if ( strlen($data) > $maxlenght ) {
+		//to avoid flood in title
+		$title = $mytitle . " ...";
+	} 
+	//print_r($ini_array);
+	//echo html header
 
-$fefefactnumber=$myvar;
+	printheader($title);
+	adsense();
+	disqus();
+	printfooter();
+exit
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
