@@ -30,8 +30,8 @@ function printbody($fefesql, $mysql){
     $next = curWEBDIR() . "/?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
-    if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip'] . "q"){
-        $sql = "UPDATE `$sql_database`.`$sql_table` SET lastip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
+    if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip']){
+        $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
         $result = $mysql->query($sql);
     }
     $visitas = $fefesql['numberviews'];
