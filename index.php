@@ -33,8 +33,7 @@ if($factoq == false){
     $title = "fefeslaps with {$url} {$facto}";
 }
 printheader($title);
-printbody($factoq, $mysql);
-
 adsense();
+printbody($factoq, $mysql);
 disqus();
 printfooter();
