@@ -1,6 +1,6 @@
 <?php
-//incluye definiciones
-include_once "includes/defs.php";
+
+require("includes/config.php");
 
 include_once "includes/functions.php";
 
