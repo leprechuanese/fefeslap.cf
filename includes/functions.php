@@ -25,35 +25,21 @@ echo "
 <html>
 <head>
 <title>$title</title>
-<script type=\"text/javascript\">
-<!--
-
-function viewPage() {
-parent.frames['ifr'].document.getElementById('iframeDiv').innerHTML=document.forms[0].elements[0].value;
-}
-
-function ClipBoard()
-{
-holdtext.innerText = copytext.innerText;
-Copied = holdtext.createTextRange();
-Copied.execCommand(\"Copy\");
-}
-
-function select_all(obj) {
-var text_val=eval(obj);
-text_val.focus();
-text_val.select();
-if (!document.all) return; // IE only
-r = text_val.createTextRange();
-r.execCommand('copy');
-}
-//-->
-</script>
 </head>
 <body BGCOLOR=\"#".WEBBACKGROUND."\">
 ";
 } //end printheader();
 
+function printbody($fefesql){
+    $url = curWEBDIR() . "/?" . $fefesql['fefefactID'];
+    $fefefactnumber = $fefesql['fefefactID'];
+    $data = $fefesql['fefefact'];
+    echo "<h1>fefefacto #" . $fefefactnumber ."</h1>
+	<a href=\"$url\">
+		$url</a><br>
+	<textarea rows=\"4\" cols=\"100\">$data</textarea>
+	</center>"; 
+}
 
 function printfooter(){
 echo "
@@ -65,10 +51,10 @@ echo "
 function getfacto($id,$mysql){
 	//get row
 	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-	$database=MYSQL_DATABASE;
-	$database_table=MYSQL_DATABASE_TABLE;
+	$database=SQL_DATABASE;
+	$database_table=SQL_DATABASE_TABLE;
 	//$sql = "SELECT * FROM `database`.`table` ORDER BY `date` DESC LIMIT 20";
-	$sql = "SELECT * FROM `$database`.`$database_table` WHERE `id` = '$id'";
+	$sql = "SELECT * FROM `$database`.`$database_table` WHERE `fefefactID` = '$id'";
 	$result = $mysql->query($sql);
 	$row = $result->fetch(PDO::FETCH_ASSOC);
 	if ( $row ) {
@@ -184,9 +170,9 @@ dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 
 function getTotalFactoNumber($mysql){
 	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-	$database=MYSQL_DATABASE;
-	$database_table=MYSQL_DATABASE_TABLE;
-	$sql="SELECT * FROM `$database`.`$database_table` WHERE `id` > ''";
+	$database= SQL_DATABASE;
+	$database_table= SQL_DATABASE_TABLE;
+	$sql="SELECT * FROM `$database`.`$database_table`";
 	$result = $mysql->query($sql);
 	$row = $result->fetch(PDO::FETCH_NUM);
 	return $result->rowCount();
