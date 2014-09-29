@@ -21,20 +21,28 @@ function printheader($title){
     <body BGCOLOR=\"#".$webbackground."\">";
 }
 
-function printbody($fefesql){
+function printbody($fefesql, $mysql){
+    global $sql_table, $sql_database;
+
     echo "<center>";
     $url = curWEBDIR() . "/?" . $fefesql['fefefactID'];
     $previous = curWEBDIR() . "/?" . ($fefesql['fefefactID'] - 1);
     $next = curWEBDIR() . "/?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
+    if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip'] . "q"){
+        $sql = "UPDATE `$sql_database`.`$sql_table` SET lastip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
+        $result = $mysql->query($sql);
+    }
+    $visitas = $fefesql['numberviews'];
     echo "<a style=\"margin-top: 15px;float: left;\" href=\"$previous\">&lt;- Anterior</a>
     <h1 style=\"margin-top: 15px; display: inline-block;\">fefefacto #" . $fefefactnumber ."</h1>
     <a style=\"margin-top: 15px;float: right;\" href=\"$next\">Siguiente -&gt</a>
     <br />
 	<a href=\"$url\">
 		$url</a><br>
-	<textarea rows=\"7\" cols=\"100\">$data</textarea>
+	<textarea rows=\"7\" cols=\"100\">$data</textarea> <br />
+    Este fefe ha sido visitado {$visitas} veces.
 	</center>"; 
 }
 

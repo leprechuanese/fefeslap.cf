@@ -17,8 +17,8 @@ $google_ad_height = 60;
 # MySQL database credentials
 $sql_host = "localhost";
 $sql_database = "fefeslap";
-$sql_user = "asd";
-$sql_password = "asd";
+$sql_user = "root";
+$sql_password = "tcpmf";
 $sql_table = "fefeslap";
 
 
