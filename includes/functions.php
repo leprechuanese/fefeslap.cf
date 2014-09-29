@@ -24,12 +24,17 @@ function printheader($title){
 function printbody($fefesql){
     echo "<center>";
     $url = curWEBDIR() . "/?" . $fefesql['fefefactID'];
+    $previous = curWEBDIR() . "/?" . ($fefesql['fefefactID'] - 1);
+    $next = curWEBDIR() . "/?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
-    echo "<h1>fefefacto #" . $fefefactnumber ."</h1>
+    echo "<a style=\"margin-top: 15px;float: left;\" href=\"$previous\">&lt;- Anterior</a>
+    <h1 style=\"margin-top: 15px; display: inline-block;\">fefefacto #" . $fefefactnumber ."</h1>
+    <a style=\"margin-top: 15px;float: right;\" href=\"$next\">Siguiente -&gt</a>
+    <br />
 	<a href=\"$url\">
 		$url</a><br>
-	<textarea rows=\"4\" cols=\"100\">$data</textarea>
+	<textarea rows=\"7\" cols=\"100\">$data</textarea>
 	</center>"; 
 }
 

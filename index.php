@@ -18,10 +18,16 @@ if(is_numeric($fefe)){
     }
     $factoq = getfacto(rand(1, getTotalFactoNumber($mysql)), $mysql);
 }
-$facto = $factoq["fefefact"];
+if($factoq == false){
+    $facto = "Facto no encontrado";
+}else{
+    $facto = $factoq["fefefact"];
+}
 
 $url = curWEBDIR() . "/?" . $factoq['fefefactID'];
-if(isset($person)){
+if($factoq == false){
+    $title = $facto;
+}elseif(isset($person)){
     $title = "fefeslaps {$person} with {$url} {$facto}";
 }else{
     $title = "fefeslaps with {$url} {$facto}";
