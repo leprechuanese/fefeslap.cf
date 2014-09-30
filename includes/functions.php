@@ -25,9 +25,9 @@ function printbody($fefesql, $mysql){
     global $sql_table, $sql_database;
 
     echo "<center>";
-    $url = curURL() . "?" . $fefesql['fefefactID'];
-    $previous = curURL() . "?" . ($fefesql['fefefactID'] - 1);
-    $next = curURL() . "?" . ($fefesql['fefefactID'] + 1);
+    $url = curPageURL() . "?" . $fefesql['fefefactID'];
+    $previous = curPageURL() . "?" . ($fefesql['fefefactID'] - 1);
+    $next = curPageURL() . "?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
     if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip']){
