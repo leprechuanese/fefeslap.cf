@@ -37,9 +37,14 @@ function printbody($fefesql, $mysql){
         $visitas = $fefesql['numberviews'] + 1;
     }
     
-    echo "<a style=\"margin-top: 15px;float: left;\" href=\"$previous\">&lt;- Anterior</a>
+    echo "
+    <div><a style=\"margin-top: 7px;float: left; display: inline-block;\" href=\"$previous\">&lt;- Anterior</a>
+    <center style= \"display: inline-block;\"><a style=\"margin-top: 7px; display: inline-block;\" href=\"". curPageURL() ."\">Aleatorio</a></center>
+        <a style=\"margin-top: 7px;float: right; display: inline-block;\" href=\"$next\">Siguiente -&gt</a>
+
+</div>
+    
     <h1 style=\"margin-top: 15px; display: inline-block;\">fefefacto #" . $fefefactnumber ."</h1>
-    <a style=\"margin-top: 15px;float: right;\" href=\"$next\">Siguiente -&gt</a>
     <br />
 	<a href=\"$url\">
 		$url</a><br>

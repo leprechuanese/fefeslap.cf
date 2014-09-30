@@ -14,10 +14,22 @@ $fefe = $_SERVER['QUERY_STRING'];
 if(is_numeric($fefe)){
     $factoq = getfacto($fefe, $mysql);
 }else{
-    if($fefe != ""){
-        $person = $fefe;
+    $f = explode("&", $fefe);
+    if(!@$f[1]){
+        if($fefe != ""){
+            header("Location: ./?" . rand(1, getTotalFactoNumber($mysql)) . "&" . $fefe );
+        }else{
+            header("Location: ./?" . rand(1, getTotalFactoNumber($mysql)));
+        }
+    }else{
+        if(is_numeric($f[1])){
+            $person = $f[0];
+            $factoq = getfacto($f[1], $mysql);
+        }else{
+            $person = $f[1];
+            $factoq = getfacto($f[0], $mysql);
+        }
     }
-    $factoq = getfacto(rand(1, getTotalFactoNumber($mysql)), $mysql);
 }
 if($factoq == false){
     $facto = "Facto no encontrado";
