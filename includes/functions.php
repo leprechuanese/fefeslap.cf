@@ -48,7 +48,7 @@ function printbody($fefesql, $mysql){
     <br />
 	<a href=\"$url\">
 		$url</a><br>
-	<textarea rows=\"7\" cols=\"100\">$data</textarea> <br />
+	<textarea disabled style=\"background-color: #fff;\" rows=\"7\" cols=\"100\">$data</textarea> <br />
     Este fefe ha sido visitado {$visitas} veces.
 	</center>"; 
 }
