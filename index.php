@@ -41,7 +41,7 @@ $url = curPageURL() . "?" . $factoq['fefefactID'];
 if($factoq == false){
     $title = $facto;
 }elseif(isset($person)){
-    $title = "fefeslaps {$person} with {$url} {$facto}";
+    $title = "fefeslaps {$person} con {$url} {$facto}";
 }else{
     $title = "fefeslaps with {$url} {$facto}";
 }
