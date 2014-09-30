@@ -3,12 +3,12 @@
 $webbackground = "ffafdf";
 
 # If true, disqus is active
-$disqus_active = true;
+$disqus_active = false;
 # Disqus forum id
 $disqus_shortname = "disgus_shortname";
 
 # If true, google adsense is active
-$adsense_active = true;
+$adsense_active = false;
 $google_ad_client = "ca-pub-5497936311153165";
 $google_ad_slot = "7432207287";
 $google_ad_width = 468;

@@ -8,7 +8,7 @@ include_once "includes/functions.php";
 $mysql = connectmysql();
 
 
-$fefe = mysql_escape_string($_SERVER['QUERY_STRING']);
+$fefe = $_SERVER['QUERY_STRING'];
 
 if(is_numeric($fefe)){
     $factoq = getfacto($fefe, $mysql);
@@ -33,7 +33,7 @@ if($factoq == false){
     $title = "fefeslaps with {$url} {$facto}";
 }
 printheader($title);
-printbody($factoq, $mysql);
 adsense();
+printbody($factoq, $mysql);
 disqus();
 printfooter();
