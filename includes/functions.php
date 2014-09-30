@@ -25,7 +25,7 @@ function printbody($fefesql, $mysql){
     global $sql_table, $sql_database;
 
     echo "<center>";
-    $url = curWEBDIR() . "/?" . $fefesql['fefefactID'];
+    $url = curURL() . "/?" . $fefesql['fefefactID'];
     $previous = curWEBDIR() . "/?" . ($fefesql['fefefactID'] - 1);
     $next = curWEBDIR() . "/?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
@@ -113,7 +113,7 @@ function adsense(){
     global $adsense_active, $google_ad_client, $google_ad_slot, $google_ad_width, $google_ad_height;
     
     if ($adsense_active){
-        echo "
+        echo "<center>
         <!-- begin adsense -->
         <script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"></script>
         <ins class=\"adsbygoogle\"
@@ -123,7 +123,7 @@ function adsense(){
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-        <!-- end adsense -->";
+        <!-- end adsense --></center>";
     }
 }
 
