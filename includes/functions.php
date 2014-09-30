@@ -25,9 +25,9 @@ function printbody($fefesql, $mysql){
     global $sql_table, $sql_database;
 
     echo "<center>";
-    $url = curURL() . "/?" . $fefesql['fefefactID'];
-    $previous = curWEBDIR() . "/?" . ($fefesql['fefefactID'] - 1);
-    $next = curWEBDIR() . "/?" . ($fefesql['fefefactID'] + 1);
+    $url = curURL() . "?" . $fefesql['fefefactID'];
+    $previous = curURL() . "?" . ($fefesql['fefefactID'] - 1);
+    $next = curURL() . "?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
     if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip']){
@@ -82,7 +82,7 @@ function calculate_uniq_key(){
 
 function curPageURL() {
 	$pageURL = 'http';
-  	if ($_SERVER["HTTPS"] == "on") {
+  	if (@$_SERVER["HTTPS"] == "on") {
 		$pageURL .= "s";
 	}
   	$pageURL .= "://";
