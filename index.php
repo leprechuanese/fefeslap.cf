@@ -37,7 +37,7 @@ if($factoq == false){
     $facto = $factoq["fefefact"];
 }
 
-$url = curWEBDIR() . "/?" . $factoq['fefefactID'];
+$url = curPageURL() . "?" . $factoq['fefefactID'];
 if($factoq == false){
     $title = $facto;
 }elseif(isset($person)){
