@@ -54,8 +54,9 @@ function printfooter(){
 
 function getfacto($id,$mysql){
     global $sql_table, $sql_database;
+    $id = $mysql->quote($id);
 	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-	$sql = "SELECT * FROM `$sql_database`.`$sql_table` WHERE `fefefactID` = '$id'";
+	$sql = "SELECT * FROM `$sql_database`.`$sql_table` WHERE `fefefactID` = $id";
 	$result = $mysql->query($sql);
 	$row = $result->fetch(PDO::FETCH_ASSOC);
 	if ( $row ) {
