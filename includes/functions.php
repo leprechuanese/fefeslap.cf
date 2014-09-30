@@ -30,11 +30,13 @@ function printbody($fefesql, $mysql){
     $next = curPageURL() . "?" . ($fefesql['fefefactID'] + 1);
     $fefefactnumber = $fefesql['fefefactID'];
     $data = $fefesql['fefefact'];
+    $visitas = $fefesql['numberviews'];
     if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip']){
         $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
         $result = $mysql->query($sql);
+        $visitas = $fefesql['numberviews'] + 1;
     }
-    $visitas = $fefesql['numberviews'];
+    
     echo "<a style=\"margin-top: 15px;float: left;\" href=\"$previous\">&lt;- Anterior</a>
     <h1 style=\"margin-top: 15px; display: inline-block;\">fefefacto #" . $fefefactnumber ."</h1>
     <a style=\"margin-top: 15px;float: right;\" href=\"$next\">Siguiente -&gt</a>
