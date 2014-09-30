@@ -173,7 +173,7 @@ echo <<<EOL
 
     <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'fefeslap'; // required: replace example with your forum shortname
+    var disqus_shortname = '{$disqus_shortname}'; // required: replace example with your forum shortname
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function () {
@@ -183,12 +183,6 @@ echo <<<EOL
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
-    
-
-
-
-
-
 EOL;
 } //if (DISQUS_ACTIVE)
 
