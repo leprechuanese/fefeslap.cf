@@ -96,10 +96,13 @@ function curPageURL() {
 	}
   	$pageURL .= "://";
   	if ($_SERVER["SERVER_PORT"] != "80") {
-   		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].dirname($_SERVER["REQUEST_URI"]) . "/";
+   		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].dirname($_SERVER["REQUEST_URI"]);
   	} else {
-   		$pageURL .= $_SERVER["SERVER_NAME"].dirname($_SERVER["REQUEST_URI"]) . "/";
+   		$pageURL .= $_SERVER["SERVER_NAME"].dirname($_SERVER["REQUEST_URI"]);
   	}
+    if(substr($pageURL, -1) != "/"){
+        $pageURL = $pageURL . "/";
+    }
   	return $pageURL;
 }
 
