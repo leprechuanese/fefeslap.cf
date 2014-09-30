@@ -139,13 +139,14 @@ function checkEmail($email) {
 }
 
 function disqus(){
-	if (DISQUS_ACTIVE){
+    global $disqus_active, $disqus_shortname;		
+	if ($disqus_active){
 echo <<<EOL
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'fefeslap'; // required: replace example with your forum shortname
+        var disqus_shortname = '{$disqus_shortname}'; // required: replace example with your forum shortname
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
