@@ -9,7 +9,7 @@ require("includes/error_display.php");
 $mysql = connectmysql();
 
 
-$fefe = mysql_escape_string($_SERVER['QUERY_STRING']);
+$fefe = mysql_real_escape_string($_SERVER['QUERY_STRING']);
 
 if(is_numeric($fefe)){
     $factoq = getfacto($fefe, $mysql);
