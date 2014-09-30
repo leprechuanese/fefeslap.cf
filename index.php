@@ -3,6 +3,7 @@
 require("includes/config.php");
 
 include_once "includes/functions.php";
+include_once "includes/error_display.inc";
 
 //conect mysql server
 $mysql = connectmysql();
@@ -34,6 +35,6 @@ if($factoq == false){
 }
 printheader($title);
 printbody($factoq, $mysql);
-adsense();
 disqus();
+adsense();
 printfooter();
