@@ -2,8 +2,8 @@
 
 require("includes/config.php");
 
-include_once "includes/functions.php";
-include_once "includes/error_display.inc";
+require("includes/functions.php");
+require("includes/error_display.php");
 
 //conect mysql server
 $mysql = connectmysql();
