@@ -10,12 +10,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Database: `fefeslap`
 --
@@ -34,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `fefeslap` (
   `last_visit` varchar(255) NOT NULL,
   `last_ip` varchar(255) NOT NULL,
   PRIMARY KEY (`fefefactID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=172 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=172 ;
 
 --
 -- Dumping data for table `fefeslap`
@@ -212,8 +206,4 @@ INSERT INTO `fefeslap` (`fefefactID`, `fefefact`, `numberviews`, `created`, `las
 (169, 'con un mama21mama> no solo eso tambien ondas de radiofrecuencias. mama21mama> yo duermo en una cama cucheta mama21mama> de un piso mas arriba de mi cama mama21mama> y pronto le pondre aislante de radiofrecuencia. mama21mama> temo que cuando duermo alguien con u nsatilite apunte a mi cerebro.', 0, '2014-09-29', '2014-09-29', '127.0.0.1'),
 (170, 'con un mama21mama> yipman: copiar y pegar sirve para naciones censuradas mama21mama> hoy aprendiste eso.', 0, '2014-09-29', '2014-09-29', '127.0.0.1'),
 (171, 'con un yipman> mama21mama: qué se siente ser jefe de mamalibre? mama21mama> no mucho yipman mama21mama> es como ser dueño de una heladera mama21mama> no es mucha satisfaccion. mama21mama> solo poca.', 0, '2014-09-29', '2014-09-29', '127.0.0.1');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 

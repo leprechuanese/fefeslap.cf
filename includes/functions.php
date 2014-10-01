@@ -8,6 +8,7 @@ function connectmysql(){
     catch(PDOException $e){
          echo $e->getMessage();
     }
+    $dbh->query("SET NAMES utf8");
 	return $dbh;
 }
 
