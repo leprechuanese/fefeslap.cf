@@ -17,6 +17,7 @@ function printheader($title){
     <html>
     <head>
     <title>$title</title>
+    <meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />
     </head>
     <body BGCOLOR=\"#".$webbackground."\">";
 }
@@ -48,7 +49,7 @@ function printbody($fefesql, $mysql){
     <br />
 	<a href=\"$url\">
 		$url</a><br>
-	<textarea disabled style=\"color: #000000; background-color: #FFFFFF;\" rows=\"7\" cols=\"100\">$data</textarea> <br />
+	<textarea disabled style=\"color: #000; background-color: #FFF;\" rows=\"7\" cols=\"100\">$data</textarea> <br />
     Este fefe ha sido visitado {$visitas} veces.
 	</center>"; 
 }
