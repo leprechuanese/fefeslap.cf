@@ -2,6 +2,9 @@
 # Page background
 $webbackground = "ffafdf";
 
+# es = spanish, en = english or use /lang/lang-{$yours}.php
+$lang="en";
+
 # If true, disqus is active
 $disqus_active = false;
 # Disqus forum id
@@ -17,8 +20,8 @@ $google_ad_height = 60;
 # MySQL database credentials
 $sql_host = "localhost";
 $sql_database = "fefeslap";
-$sql_user = "root";
-$sql_password = "tcpmf";
+$sql_user = "fefeslap";
+$sql_password = "fefeslap";
 $sql_table = "fefeslap";
 
 

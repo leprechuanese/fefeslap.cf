@@ -1,7 +1,7 @@
 <?php
 
 require("includes/config.php");
-
+require_once("lang/lang-{$lang}.php");
 require("includes/functions.php");
 require("includes/error_display.php");
 
@@ -32,7 +32,7 @@ if(is_numeric($fefe)){
     }
 }
 if($factoq == false){
-    $facto = "Facto no encontrado";
+    $facto = "{$fefeslap_not_found}";
 }else{
     $facto = $factoq["fefefact"];
 }
@@ -41,9 +41,9 @@ $url = curPageURL() . "?" . $factoq['fefefactID'];
 if($factoq == false){
     $title = $facto;
 }elseif(isset($person)){
-    $title = "fefeslaps {$person} con {$url} {$facto}";
+    $title = "{$fefeslap_name} {$person} {$fefeslap_with} {$url} {$facto}";
 }else{
-    $title = "fefeslaps with {$url} {$facto}";
+    $title = "{$fefeslap_name} {$fefeslap_with} {$url} {$facto}";
 }
 printheader($title);
 printbody($factoq, $mysql);

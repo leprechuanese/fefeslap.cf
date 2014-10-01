@@ -24,7 +24,7 @@ function printheader($title){
 }
 
 function printbody($fefesql, $mysql){
-    global $sql_table, $sql_database;
+    global $sql_table, $sql_database, $fefeslap_previous, $fefeslap_random, $fefeslap_next, $fefeslap_fefefacto, $fefeslap_this,$fefeslap_its_been_visit, $fefeslap_times;
 
     echo "<center>";
     $url = curPageURL() . "?" . $fefesql['fefefactID'];
@@ -40,18 +40,18 @@ function printbody($fefesql, $mysql){
     }
     
     echo "
-    <div><a style=\"margin-top: 7px;float: left; display: inline-block;\" href=\"$previous\">&lt;- Anterior</a>
-    <center style= \"display: inline-block;\"><a style=\"margin-top: 7px; display: inline-block;\" href=\"". curPageURL() ."\">Aleatorio</a></center>
-        <a style=\"margin-top: 7px;float: right; display: inline-block;\" href=\"$next\">Siguiente -&gt</a>
+    <div><a style=\"margin-top: 7px;float: left; display: inline-block;\" href=\"$previous\">$fefeslap_previous</a>
+    <center style= \"display: inline-block;\"><a style=\"margin-top: 7px; display: inline-block;\" href=\"". curPageURL() ."\">$fefeslap_random</a></center>
+        <a style=\"margin-top: 7px;float: right; display: inline-block;\" href=\"$next\">$fefeslap_next</a>
 
 </div>
     
-    <h1 style=\"margin-top: 15px; display: inline-block;\">fefefacto #" . $fefefactnumber ."</h1>
+    <h1 style=\"margin-top: 15px; display: inline-block;\">$fefeslap_fefefacto #" . $fefefactnumber ."</h1>
     <br />
 	<a href=\"$url\">
 		$url</a><br>
 	<textarea disabled style=\"color: #000; background-color: #FFF;\" rows=\"7\" cols=\"100\">$data</textarea> <br />
-    Este fefe ha sido visitado {$visitas} veces.
+    {$fefeslap_this} {$fefeslap_fefefacto} {$fefeslap_its_been_visit} {$visitas} {$fefeslap_times}.
 	</center>"; 
 }
 
