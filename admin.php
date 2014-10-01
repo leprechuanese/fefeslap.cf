@@ -50,6 +50,14 @@ if((@$_GET['a'] == "edit") && (@$_POST['fefe'])){
     die();
 }
 
+if((@$_GET['a'] == "new") && (@$_POST['fefe'])){
+    $_POST['fefe'] = $mysql->quote($_POST['fefe']);
+    $sql = "INSERT INTO `{$sql_database}`.`{$sql_table}` (`fefefact`, `created`) VALUES ({$_POST['fefe']}, '".date("Y-m-d")."')";
+    $result = $mysql->query($sql);
+    header("Location: admin.php");
+    die();
+}
+
 
 printheader("Administración");
 switch(@$_GET['a']){
@@ -58,35 +66,25 @@ switch(@$_GET['a']){
         <h1>Editar fefeslap</h1>
         <form method=\"post\">
         <textarea rows=\"7\" cols=\"70\" name=\"fefe\"></textarea> <br/> <br />
-        <input type=\"submit\" value=\"Enviar burrada\" />
+        <input type=\"submit\" value=\"Enviar burrada\" />  <a href=\"admin.php\">[Cancelar]</a>
         </form>
         ";
-
-        if(@!$_POST['fefe']){
-
-        }else{
-            $_POST['fefe'] = $mysql->quote($_POST['fefe']);
-            $sql = "INSERT INTO `fefeslap` (`fefefact`, `created`) VALUES ({$_POST['fefe']}, '".date("Y-m-d")."')";
-            $result = $mysql->query($sql);
-            echo "Fefe enviado";
-        }
     break;
     case "edit":
         echo "
         <h1>Editar fefeslap</h1>
         <form method=\"post\">
         <textarea rows=\"7\" cols=\"70\" name=\"fefe\">". getfacto($_GET['id'], $mysql)['fefefact'] ."</textarea> <br/> <br />
-        <input type=\"submit\" value=\"Enviar\" />
-        </form>
-        ";
+        <input type=\"submit\" value=\"Enviar\" /> <a href=\"admin.php\">[Cancelar]</a>
+        </form>";
         
     break;
     default:
         echo "<h1>Administración</h1>";
-        $result = $mysql->query("SELECT * FROM fefeslap");
+        $result = $mysql->query("SELECT * FROM `{$sql_database}`.`{$sql_table}`");
         echo "<table><tr><td>#</td><td><b>facto</b></td></tr>";
         while($fefe = $result->fetch(PDO::FETCH_ASSOC)){
-            echo "<tr><td>{$fefe['fefefactID']}</td><td>". substr($fefe['fefefact'],0, 80)."</td><td><a href=\"?a=del&id={$fefe['fefefactID']}\">[Eliminar]</a> <a href=\"?a=edit&id={$fefe['fefefactID']}\">[Editar]</a></td></tr>";
+            echo "<tr><td>{$fefe['fefefactID']}</td><td>". htmlentities(substr($fefe['fefefact'],0, 80))."</td><td><a href=\"?a=del&id={$fefe['fefefactID']}\" onclick=\"return confirm('Estas seguro/a?')\">[Eliminar]</a> <a href=\"?a=edit&id={$fefe['fefefactID']}\">[Editar]</a></td></tr>";
         }
         echo "</table>";
 }
