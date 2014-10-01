@@ -66,13 +66,13 @@ switch(@$_GET['a']){
         <h1>Editar fefeslap</h1>
         <form method=\"post\">
         <textarea rows=\"7\" cols=\"70\" name=\"fefe\"></textarea> <br/> <br />
-        <input type=\"submit\" value=\"Enviar burrada\" />  <a href=\"admin.php\">[Cancelar]</a>
+        <input type=\"submit\" value=\"Enviar facto\" />  <a href=\"admin.php\">[Cancelar]</a>
         </form>
         ";
     break;
     case "edit":
         echo "
-        <h1>Editar fefeslap</h1>
+        <h1>Editar facto</h1>
         <form method=\"post\">
         <textarea rows=\"7\" cols=\"70\" name=\"fefe\">". getfacto($_GET['id'], $mysql)['fefefact'] ."</textarea> <br/> <br />
         <input type=\"submit\" value=\"Enviar\" /> <a href=\"admin.php\">[Cancelar]</a>
@@ -81,6 +81,7 @@ switch(@$_GET['a']){
     break;
     default:
         echo "<h1>Administración</h1>";
+        echo "<a href=\"?a=new\">[Nuevo]</a> <br /><br />";
         $result = $mysql->query("SELECT * FROM `{$sql_database}`.`{$sql_table}`");
         echo "<table><tr><td>#</td><td><b>facto</b></td></tr>";
         while($fefe = $result->fetch(PDO::FETCH_ASSOC)){
