@@ -35,7 +35,7 @@ function printbody($fefesql, $mysql){
     $data = $fefesql[1]['fefefact'];
     $visitas = $fefesql[1]['numberviews'];
     if($_SERVER['REMOTE_ADDR'] != $fefesql[1]['last_ip']){
-        $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql[1]['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
+        $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql[1]['numberviews']+1)." WHERE `fefefactID` = '{$fefesql[1]['fefefactID']}'";
         $result = $mysql->query($sql);
         $visitas = $fefesql[1]['numberviews'] + 1;
     }
