@@ -13,6 +13,7 @@ function connectmysql(){
 }
 
 function printheader($title){
+    $title = htmlentities($title);
     global $webbackground;
     echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">
     <html>
@@ -26,27 +27,31 @@ function printheader($title){
 function printbody($fefesql, $mysql){
     global $sql_table, $sql_database, $fefeslap_previous, $fefeslap_random, $fefeslap_next, $fefeslap_fefefacto, $fefeslap_this,$fefeslap_its_been_visit, $fefeslap_times;
 
+
     echo "<center>";
-    $url = curPageURL() . "?" . $fefesql['fefefactID'];
-    $previous = curPageURL() . "?" . ($fefesql['fefefactID'] - 1);
-    $next = curPageURL() . "?" . ($fefesql['fefefactID'] + 1);
-    $fefefactnumber = $fefesql['fefefactID'];
-    $data = $fefesql['fefefact'];
-    $visitas = $fefesql['numberviews'];
-    if($_SERVER['REMOTE_ADDR'] != $fefesql['last_ip']){
-        $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
+    $url = curPageURL() . "?" . $fefesql[1]['fefefactID'];
+    
+    $fefefactnumber = $fefesql[1]['fefefactID'];
+    $data = $fefesql[1]['fefefact'];
+    $visitas = $fefesql[1]['numberviews'];
+    if($_SERVER['REMOTE_ADDR'] != $fefesql[1]['last_ip']){
+        $sql = "UPDATE `$sql_database`.`$sql_table` SET last_ip='{$_SERVER['REMOTE_ADDR']}', numberviews=". ($fefesql[1]['numberviews']+1)." WHERE `fefefactID` = '{$fefesql['fefefactID']}'";
         $result = $mysql->query($sql);
-        $visitas = $fefesql['numberviews'] + 1;
+        $visitas = $fefesql[1]['numberviews'] + 1;
     }
     
-    echo "
-    <div><a style=\"margin-top: 7px;float: left; display: inline-block;\" href=\"$previous\">$fefeslap_previous</a>
-    <center style= \"display: inline-block;\"><a style=\"margin-top: 7px; display: inline-block;\" href=\"". curPageURL() ."\">$fefeslap_random</a></center>
-        <a style=\"margin-top: 7px;float: right; display: inline-block;\" href=\"$next\">$fefeslap_next</a>
+    echo "<div>";
+    if($fefesql[0] != null){
+        $previous = curPageURL() . "?" . $fefesql[0]['fefefactID'];
+        echo "<a style=\"margin-top: 7px;float: left; display: inline-block;\" href=\"$previous\">$fefeslap_previous</a>";
+    }
+    echo "<center style= \"display: inline-block;\"><a style=\"margin-top: 7px; display: inline-block;\" href=\"". curPageURL() ."\">$fefeslap_random</a></center>";
+    if($fefesql[2] != null){
+        $next = curPageURL() . "?" . $fefesql[2]['fefefactID'];
+        echo "<a style=\"margin-top: 7px;float: right; display: inline-block;\" href=\"$next\">$fefeslap_next</a>";
+    }
 
-</div>
-    
-    <h1 style=\"margin-top: 15px; display: inline-block;\">$fefeslap_fefefacto #" . $fefefactnumber ."</h1>
+    echo "</div><h1 style=\"margin-top: 15px; display: inline-block;\">$fefeslap_fefefacto #" . $fefefactnumber ."</h1>
     <br />
 	<a href=\"$url\">
 		$url</a><br>
@@ -71,6 +76,28 @@ function getfacto($id,$mysql){
 	} else {
 		return 0;
 	}
+}
+
+function getfactov2($id,$mysql){
+    global $sql_table, $sql_database;
+    $id = $mysql->quote($id);
+	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from fefeslap where fefefactID > $id),0) or  fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID < $id),0) or fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID = $id),0))  ";
+	$result = $mysql->query($sql);
+    $results = array();
+	while($row = $result->fetch(PDO::FETCH_ASSOC)){
+        array_push($results, $row);
+    }
+    if(count($results) == 2){
+        if("'".$results[1]['fefefactID']."'" == $id){
+            $results[2] = null;
+        }elseif("'".$results[0]['fefefactID']."'" == $id){
+            array_unshift($results, null);
+        }else{
+            return false;
+        }
+    }
+    return $results;
 }
 
 function rand_string( $length ) {

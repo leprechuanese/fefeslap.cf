@@ -13,4 +13,4 @@ $fefeslap_next = "Siguiente -&gt";
 $fefeslap_fefefacto = "Fefefacto";
 $fefeslap_this = "Este";
 $fefeslap_its_been_visit = "ha sido visitado";
-$fefeslap_times = "veses";
+$fefeslap_times = "veces";

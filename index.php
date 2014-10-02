@@ -12,7 +12,7 @@ $mysql = connectmysql();
 $fefe = $_SERVER['QUERY_STRING'];
 
 if(is_numeric($fefe)){
-    $factoq = getfacto($fefe, $mysql);
+    $factoq = getfactov2($fefe, $mysql);
 }else{
     $f = explode("&", $fefe);
     if(!@$f[1]){
@@ -24,20 +24,20 @@ if(is_numeric($fefe)){
     }else{
         if(is_numeric($f[1])){
             $person = $f[0];
-            $factoq = getfacto($f[1], $mysql);
+            $factoq = getfactov2($f[1], $mysql);
         }else{
             $person = $f[1];
-            $factoq = getfacto($f[0], $mysql);
+            $factoq = getfactov2($f[0], $mysql);
         }
     }
 }
 if($factoq == false){
     $facto = "{$fefeslap_not_found}";
 }else{
-    $facto = $factoq["fefefact"];
+    $facto = $factoq[1]["fefefact"];
 }
 
-$url = curPageURL() . "?" . $factoq['fefefactID'];
+$url = curPageURL() . "?" . $factoq[1]['fefefactID'];
 if($factoq == false){
     $title = $facto;
 }elseif(isset($person)){

@@ -12,5 +12,5 @@ $fefeslap_random = "Random";
 $fefeslap_next = "Next -&gt";
 $fefeslap_fefefacto = "Fefefacto";
 $fefeslap_this = "This";
-$fefeslap_its_been_visit = "it's been view";
+$fefeslap_its_been_visit = "has been visited";
 $fefeslap_times = "times";
