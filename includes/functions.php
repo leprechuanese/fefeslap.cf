@@ -82,7 +82,8 @@ function getfactov2($id,$mysql){
     global $sql_table, $sql_database;
     $id = $mysql->quote($id);
 	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-	$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from fefeslap where fefefactID > $id),0) or  fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID < $id),0) or fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID = $id),0))  ";
+//	$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from fefeslap where fefefactID > $id),0) or  fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID < $id),0) or fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID = $id),0))  ";
+        $sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from `$sql_table` where fefefac$
 	$result = $mysql->query($sql);
     $results = array();
 	while($row = $result->fetch(PDO::FETCH_ASSOC)){
