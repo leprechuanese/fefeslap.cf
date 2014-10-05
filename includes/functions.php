@@ -13,6 +13,7 @@ function connectmysql(){
 }
 
 function printheader($title){
+    $title = str_replace(array("<", ">"), array("[", "]"), $title);
     $title = htmlentities($title);
     global $webbackground;
     echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">
@@ -26,7 +27,6 @@ function printheader($title){
 
 function printbody($fefesql, $mysql){
     global $sql_table, $sql_database, $fefeslap_previous, $fefeslap_random, $fefeslap_next, $fefeslap_fefefacto, $fefeslap_this,$fefeslap_its_been_visit, $fefeslap_times;
-
 
     echo "<center>";
     $url = curPageURL() . "?" . $fefesql[1]['fefefactID'];
@@ -82,8 +82,8 @@ function getfactov2($id,$mysql){
     global $sql_table, $sql_database;
     $id = $mysql->quote($id);
 	$mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-//	$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from fefeslap where fefefactID > $id),0) or  fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID < $id),0) or fefefactID = IFNULL((select max(fefefactID) from fefeslap where fefefactID = $id),0))  ";
-        $sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from `$sql_table` where fefefac$
+	$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from `$sql_table` where fefefactID > $id),0) or  fefefactID = IFNULL((select max(fefefactID) from `$sql_table` where fefefactID < $id),0) or fefefactID = IFNULL((select max(fefefactID) from `$sql_table` where fefefactID = $id),0))  ";
+    //$sql = "select * from `$sql_database`.`$sql_table` where (fefefactID = IFNULL((select min(fefefactID) from `$sql_table` where fefefac
 	$result = $mysql->query($sql);
     $results = array();
 	while($row = $result->fetch(PDO::FETCH_ASSOC)){
