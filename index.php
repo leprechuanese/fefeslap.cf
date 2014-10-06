@@ -31,8 +31,13 @@ if(is_numeric($fefe)){
         }
     }
 }
-if($factoq == false){
+if(!$factoq ){
     $facto = "{$fefeslap_not_found}";
+    printheader($facto);
+    echo $facto;
+    printfooter();
+
+    return;
 }else{
     $facto = $factoq[1]["fefefact"];
 }

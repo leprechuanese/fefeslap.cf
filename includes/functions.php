@@ -97,6 +97,8 @@ function getfactov2($id,$mysql){
         }else{
             return false;
         }
+    }elseif(count($results) < 2){
+        return false;
     }
     return $results;
 }

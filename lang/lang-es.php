@@ -4,7 +4,7 @@
 //
 
 $fefeslap_name  = "fefeslaps";
-$fefeslap_not_found = "{$fefeslap_name} no encontrado";
+$fefeslap_not_found = "fefeslap no encontrado";
 $fefeslap_with = "con";
 
 $fefeslap_previous = "&lt;- Anterior";
