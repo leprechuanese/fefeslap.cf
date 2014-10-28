@@ -54,6 +54,7 @@ if((@$_GET['a'] == "new") && (@$_POST['fefe'])){
     $_POST['fefe'] = $mysql->quote($_POST['fefe']);
     $sql = "INSERT INTO `{$sql_database}`.`{$sql_table}` (`fefefact`, `created`) VALUES ({$_POST['fefe']}, '".date("Y-m-d")."')";
     $result = $mysql->query($sql);
+    $mysql->query("SET @count = 0; UPDATE `{$sql_database}`.`{$sql_table}` SET fefefactID = @count:= @count + 1; ALTER TABLE `{$sql_database}`.`{$sql_table}` AUTO_INCREMENT = 1;");
     header("Location: admin.php");
     die();
 }

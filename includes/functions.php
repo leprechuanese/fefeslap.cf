@@ -100,7 +100,7 @@ function getfactov2($id,$mysql){
     }elseif(count($results) == 1){
         array_unshift($results, null);
         array_push($results, null);
-    }elseif(count($results) < 1){
+    }elseif(count($results) == 0){
         return false;
     }
     return $results;
